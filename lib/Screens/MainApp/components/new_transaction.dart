@@ -36,7 +36,7 @@ class _NewTransactionState extends State<NewTransaction> {
       lastDate: DateTime(2500),
       builder: (context, child) {
         return Theme(
-          data: ThemeData.dark(), // This will change to light theme.
+          data: ThemeData.dark(), 
           child: child,
         );
       },
@@ -73,7 +73,6 @@ class _NewTransactionState extends State<NewTransaction> {
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(labelText: "amount"),
                 controller: _amountController,
-                //"(_)" Is here because I must accept argument (flutter works that way) but i don`t use it
                 onSubmitted: (_) => _submitListItem(),
               ),
             ),

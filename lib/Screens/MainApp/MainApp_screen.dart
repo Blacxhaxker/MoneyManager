@@ -27,8 +27,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  double totalSummainapp = 0.0;
+
   bool shouldShowChart = false;
+  
   final List<Transaction> _transactionLIst = [
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
@@ -36,7 +37,6 @@ class _MyAppState extends State<MyApp> {
 
   List<Transaction> get _recentTransactions {
     return _transactionLIst.where((transaction) {
-      //only transaction that are maximum week old returned here
       return transaction.date
           .isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();

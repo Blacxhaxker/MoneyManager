@@ -8,7 +8,6 @@ class NoContent extends StatelessWidget {
       builder: (context, constraints) {
         return Column(
           children: <Widget>[
-            // Text("No transactions added"),
             SizedBox(
               height: 18,
             ),

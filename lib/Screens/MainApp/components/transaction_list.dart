@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:Final_Project/models/transaction.dart';
 import './no_content.dart';
 
-//This is Stateless because the state of the wid
 class TransactionList extends StatelessWidget {
   final List<Transaction> transaction;
   final Function deleteTransaction;

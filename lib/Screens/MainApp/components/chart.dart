@@ -6,6 +6,7 @@ import 'package:Final_Project/models/transaction.dart';
 import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
+
   final List<Transaction> recentTransactions;
 
   Chart({this.recentTransactions});
@@ -15,7 +16,8 @@ class Chart extends StatelessWidget {
       //subtract index times day from current day
       final weekDay = DateTime.now().subtract(Duration(days: index));
 
-      double totalSum = 0.0;
+      double totalSum = 0.0;//check output
+      
       for (int i = 0; i < recentTransactions.length; i++) {
         if (recentTransactions[i].date.day == weekDay.day &&
             recentTransactions[i].date.month == weekDay.month &&
@@ -35,7 +37,7 @@ class Chart extends StatelessWidget {
     }).reversed.toList();
   }
 
-  //in flutter you can change list to int or double for example
+  
   double get getTotalWeekSpending {
     //0.0 starting value
     return allTransactions.fold(0.0, (sum, item) {
