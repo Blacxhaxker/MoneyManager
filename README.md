@@ -5,8 +5,9 @@ name : Money Manager
 ## Getting Started
 
 1.clone this project.<br>
-2.Type 'flutter pub get' in command line.<br>
-3.Type 'flutter run' to run application.<br>
+``` gh repo clone Blacxhaxker/MoneyManager ```<br>
+3.Type 'flutter pub get' in command line.<br>
+```3.Type 'flutter run' to run application.```<br>
 
 ( This application and include library base on flutter version 1.22.4 )
 
