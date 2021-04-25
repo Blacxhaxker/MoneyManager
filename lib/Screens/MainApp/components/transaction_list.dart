@@ -31,6 +31,7 @@ class TransactionList extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
+                      // backgroundImage: NetworkImage(transaction[index].image),
                       backgroundColor: kSecondColor,
                       radius: 30,
                       child: Padding(
