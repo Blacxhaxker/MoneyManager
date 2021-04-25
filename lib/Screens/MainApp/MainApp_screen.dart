@@ -43,11 +43,12 @@ class _MyAppState extends State<MyApp> {
   }
 
 
-  void _addNewTransaction(String title, double amount, DateTime chosenDate) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate , String image) {
     Transaction newTransaction = Transaction(
         title: title,
         amount: amount,
         date: chosenDate,
+        image: image,
         id: DateTime.now().toString());
     setState(() {
       _transactionLIst.add(newTransaction);

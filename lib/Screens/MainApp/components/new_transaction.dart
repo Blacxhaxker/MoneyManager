@@ -70,7 +70,7 @@ class _NewTransactionState extends State<NewTransaction> {
     if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate);
+    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate,enteredImage);
     //close bottom sheet after adding new transaction
     Navigator.of(context).pop();
   }
