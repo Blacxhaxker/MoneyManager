@@ -59,18 +59,20 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _detailController = TextEditingController();
   DateTime _selectedDate;
   UserModel _selectedItemUser;  
 
   void _submitListItem() {
     final String enteredTitle = _selectedItemUser.name;
+    final String enteredDetail = _detailController.text;
     final String enteredImage = _selectedItemUser.avatar;
     final double enteredAmount = double.parse(_amountController.text);
     //some input is empty - stop function here
     if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate,enteredImage);
+    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate,enteredImage,enteredDetail);
     //close bottom sheet after adding new transaction
     Navigator.of(context).pop();
   }
@@ -139,8 +141,17 @@ class _NewTransactionState extends State<NewTransaction> {
               padding:
                   EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
               child: TextField(
+                decoration: InputDecoration(labelText: "Detail"),
+                controller: _detailController,
+                onSubmitted: (_) => _submitListItem(),
+              ),
+            ),
+            Container(
+              padding:
+                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+              child: TextField(
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(labelText: "amount"),
+                decoration: InputDecoration(labelText: "Amount"),
                 controller: _amountController,
                 onSubmitted: (_) => _submitListItem(),
               ),
