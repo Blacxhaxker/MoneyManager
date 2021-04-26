@@ -27,9 +27,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   bool shouldShowChart = false;
-  
+
   final List<Transaction> _transactionLIst = [
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now()),
     // Transaction(id: "my id", title: "title", amount: 20.0, date: DateTime.now())
@@ -42,8 +41,7 @@ class _MyAppState extends State<MyApp> {
     }).toList();
   }
 
-
-  void _addNewTransaction(String title, double amount, DateTime chosenDate , String image,String detail) {
+  void _addNewTransaction(String title, double amount, DateTime chosenDate , String image, String detail) {
     Transaction newTransaction = Transaction(
         title: title,
         amount: amount,
@@ -82,105 +80,104 @@ class _MyAppState extends State<MyApp> {
       child: TransactionList(_transactionLIst, _deleteTransaction),
     );
     var scaffold = Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                "Money Manager",
-                style: TextStyle(fontSize: 18, color: Colors.white70),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Money Manager",
+          style: TextStyle(fontSize: 18, color: Colors.white70),
+        ),
+        elevation: 10,
+        backgroundColor: kPrimaryColor,
+      ),
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
               ),
-              elevation: 10,
-              backgroundColor: kPrimaryColor,
-              
-            ),
-            drawer: Drawer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
-                      color: kPrimaryColor,
-                    ),
-                    accountName: Text(name),
-                    accountEmail: Text(email),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        imageUrl,
-                      ),
-                      radius: 60,
-                      backgroundColor: Colors.transparent,
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.logout),
-                    tileColor: kSecondColor,
-                    title: Text('LOGOUT'),
-                    onTap: () {
-                      signOutGoogle();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) {
-                        return LoginScreen();
-                      }), ModalRoute.withName('/'));
-                    },
-                  ),
-                  Divider(),
-                ],
+              accountName: Text(name),
+              accountEmail: Text(email),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  imageUrl,
+                ),
+                radius: 60,
+                backgroundColor: Colors.transparent,
               ),
             ),
-            body: SingleChildScrollView(
-              child: Container(
-                color: kSecondColor,
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+            ListTile(
+              leading: Icon(Icons.logout),
+              tileColor: kSecondColor,
+              title: Text('LOGOUT'),
+              onTap: () {
+                signOutGoogle();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) {
+                  return LoginScreen();
+                }), ModalRoute.withName('/'));
+              },
+            ),
+            Divider(),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: kSecondColor,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              if (isLandscape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    if (isLandscape)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Show charts"),
-                          Switch(
-                            value: shouldShowChart,
-                            onChanged: (value) {
-                              setState(() {
-                                shouldShowChart = value;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    if (!isLandscape)
-                      Chart(
-                        recentTransactions: _recentTransactions,
-                      ),
-                    if (!isLandscape) transactionListWidget,
-                    if (isLandscape)
-                      shouldShowChart
-                          ? Chart(
-                              recentTransactions: _recentTransactions,
-                            )
-                          : transactionListWidget,
+                    Text("Show charts"),
+                    Switch(
+                      value: shouldShowChart,
+                      onChanged: (value) {
+                        setState(() {
+                          shouldShowChart = value;
+                        });
+                      },
+                    ),
                   ],
                 ),
-              ),
-            ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: kPrimaryColor,
-              onPressed: () {
-                setState(() {
-                  startAddingNewTransaction(context);
-                });
-              },
-              child: new Icon(Icons.add),
-            ),
-          );
-        return MaterialApp(
-          //main ui
-          debugShowCheckedModeBanner: false,
-          title: 'Money manager',
-          home: scaffold,
+              if (!isLandscape)
+                Chart(
+                  recentTransactions: _recentTransactions,
+                ),
+              if (!isLandscape) transactionListWidget,
+              if (isLandscape)
+                shouldShowChart
+                    ? Chart(
+                        recentTransactions: _recentTransactions,
+                      )
+                    : transactionListWidget,
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kPrimaryColor,
+        onPressed: () {
+          setState(() {
+            startAddingNewTransaction(context);
+          });
+        },
+        child: new Icon(Icons.add),
+      ),
+    );
+    return MaterialApp(
+      //main ui
+      debugShowCheckedModeBanner: false,
+      title: 'Money manager',
+      home: scaffold,
     );
   }
 }
