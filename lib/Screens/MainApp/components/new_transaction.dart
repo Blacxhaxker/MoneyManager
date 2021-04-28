@@ -9,9 +9,10 @@ class UserModel {
   final String id;
   final DateTime createdAt;
   final String name;
+  final String detail;
   final String avatar;
 
-  UserModel({this.id, this.createdAt, this.name, this.avatar});
+  UserModel({this.id, this.createdAt, this.name, this.avatar, this.detail});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     if (json == null) return null;
@@ -20,6 +21,7 @@ class UserModel {
       createdAt:
           json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
       name: json["name"],
+      detail: json["detail"],
       avatar: json["avatar"],
     );
   }
@@ -72,7 +74,7 @@ class _NewTransactionState extends State<NewTransaction> {
     if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       return;
     }
-    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate,enteredImage,enteredDetail);
+    widget.addTransaction(enteredTitle, enteredAmount, _selectedDate.toString(),enteredImage,enteredDetail);
     //close bottom sheet after adding new transaction
     Navigator.of(context).pop();
   }

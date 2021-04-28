@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:Final_Project/Screens/Login/login_screen.dart';
+import 'package:Final_Project/Screens/check/check.dart';
 import 'package:flutter/material.dart';
 import 'package:Final_Project/Screens/MainApp/components/chart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './components/transaction_list.dart';
 import './components/new_transaction.dart';
 import 'package:Final_Project/models/transaction.dart';
@@ -36,22 +40,26 @@ class _MyAppState extends State<MyApp> {
 
   List<Transaction> get _recentTransactions {
     return _transactionLIst.where((transaction) {
-      return transaction.date
+      return DateTime.parse(transaction.date)
           .isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount, DateTime chosenDate , String image, String detail) {
+  void _addNewTransaction(String title, double amount, String chosenDate , String image, String expen) async{
     Transaction newTransaction = Transaction(
         title: title,
         amount: amount,
         date: chosenDate,
         image: image,
-        detail: detail,
+        expen : expen,
         id: DateTime.now().toString());
     setState(() {
       _transactionLIst.add(newTransaction);
     });
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var testEncoded =
+        _transactionLIst.map((test) => jsonEncode(test.toJson())).toList();
+    await sharedPreferences.setStringList('arrayObj', testEncoded);
   }
 
   void _deleteTransaction(String id) {
@@ -108,6 +116,19 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: Colors.transparent,
               ),
             ),
+            ListTile(
+              leading: Icon(Icons.monetization_on),
+              tileColor: kSecondColor,
+              title: Text('เช็ครายการ'),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return Check();
+                  }),
+                );
+              },
+            ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.logout),
               tileColor: kSecondColor,

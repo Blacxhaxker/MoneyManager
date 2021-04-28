@@ -19,9 +19,9 @@ class Chart extends StatelessWidget {
       double totalSum = 0.0;//check output
       
       for (int i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
+        if (DateTime.parse(recentTransactions[i].date).day == weekDay.day &&
+            DateTime.parse(recentTransactions[i].date).month == weekDay.month &&
+            DateTime.parse(recentTransactions[i].date).year == weekDay.year) {
           totalSum += recentTransactions[i].amount;
           //todo check why this is being received 15 times and not 1
           print("total sum is " + totalSum.toString());

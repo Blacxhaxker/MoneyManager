@@ -44,8 +44,8 @@ class TransactionList extends StatelessWidget {
                           color: kPrimaryColor),
                     ),
                     subtitle: Text(
-                      "${transaction[index].detail} - "+"\$ ${transaction[index].amount}"+
-                      DateFormat("              dd/MM/yyyy").format(transaction[index].date),
+                      "${transaction[index].expen} - "+"\$ ${transaction[index].amount}"+
+                      DateFormat("              dd/MM/yyyy").format(DateTime.parse(transaction[index].date)),
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
